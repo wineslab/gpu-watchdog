@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  tf:
+    build: ./tf
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+
+  torch:
+    build: ./torch
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia

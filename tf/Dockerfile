@@ -5,10 +5,7 @@ FROM tensorflow/tensorflow:latest-gpu
 WORKDIR /app
 
 # Copy the script to check GPU utilization
-COPY check_gpu_tf.py /app/check_gpu_tf.py
-
-# Install any necessary dependencies (if needed)
-# RUN pip install --no-cache-dir some-package
+COPY main.py /app/main.py
 
 # Run the script to check GPU utilization
-CMD ["python", "check_gpu_tf.py"]
+CMD ["python", "main.py"]
