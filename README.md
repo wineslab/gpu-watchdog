@@ -1,8 +1,9 @@
 # GPU Watchdog 🐕
-GPU Watchdog is your go-to toolkit for monitoring, testing, and validating GPU utilization in deep learning frameworks like TensorFlow and PyTorch.
+Monitor and validate GPU usage for TensorFlow and PyTorch.
 
-Ensure that you have NVIDIA Docker installed and configured on your system to use GPU resources within Docker containers.
+**Requirements:** NVIDIA Docker for containerized GPU access.
 
-For torch/tf
-
+**Usage:**
+```
 docker compose --build torch/tf
+```
