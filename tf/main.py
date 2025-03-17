@@ -31,14 +31,13 @@ B = tf.random.normal((size, size))
 logging.info("Starting GPU stress test...")
 
 iteration = 0
-while True:
-    iteration += 1
+for i in range(10):
     start_time = time.time()
     try:
         # Perform matrix multiplication (GPU-intensive)
         C = tf.matmul(A, B)
     except Exception as e:
-        logging.error(f"Iteration {iteration}: An error occurred: {e}")
+        logging.error(f"Iteration {i}: An error occurred: {e}")
         continue
 
     end_time = time.time()
@@ -50,10 +49,10 @@ while True:
             mem_info = tf.config.experimental.get_memory_info(device_name)
             current_mem = mem_info.get('current', 0) / (1024 ** 2)
             peak_mem = mem_info.get('peak', 0) / (1024 ** 2)
-            logging.info(f"Iteration {iteration} on GPU (Model: {gpu_model}): "
+            logging.info(f"Iteration {i} on GPU (Model: {gpu_model}): "
                          f"Time {elapsed_time:.2f}s, Current Memory: {current_mem:.2f} MB, Peak Memory: {peak_mem:.2f} MB")
         except Exception as e:
-            logging.error(f"Iteration {iteration} on GPU (Model: {gpu_model}): "
+            logging.error(f"Iteration {i} on GPU (Model: {gpu_model}): "
                           f"Could not retrieve memory info: {e}")
     else:
-        logging.info(f"Iteration {iteration} on CPU: Completed in {elapsed_time:.2f}s")
+        logging.info(f"Iteration {i} on CPU: Completed in {elapsed_time:.2f}s")

@@ -32,20 +32,19 @@ logging.info("Starting GPU stress test...")
 
 iteration = 0
 gpu_model = gpu_props.name if torch.cuda.is_available() else "N/A"
-while True:
-    iteration += 1
+for i in range(100):
     start_time = time.time()
     try:
         # Perform matrix multiplication (GPU-intensive)
         C = torch.mm(A, B)
         torch.cuda.synchronize()  # Ensure all operations complete
     except Exception as e:
-        logging.error(f"Iteration {iteration}: Exception encountered: {e}")
+        logging.error(f"Iteration {i}: Exception encountered: {e}")
         continue
 
     elapsed_time = time.time() - start_time
     allocated_memory = torch.cuda.memory_allocated(device) / (1024 ** 2)
     reserved_memory = torch.cuda.memory_reserved(device) / (1024 ** 2)
 
-    logging.info(f"Iteration {iteration} on {device} (GPU Model: {gpu_model}): Matrix multiplication took {elapsed_time:.2f} seconds")
-    logging.info(f"Iteration {iteration} on {device} (GPU Model: {gpu_model}): Time {elapsed_time:.2f}s, Allocated {allocated_memory:.2f} MB, Reserved {reserved_memory:.2f} MB")
+    logging.info(f"Iteration {i} on {device} (GPU Model: {gpu_model}): Matrix multiplication took {elapsed_time:.2f} seconds")
+    logging.info(f"Iteration {i} on {device} (GPU Model: {gpu_model}): Time {elapsed_time:.2f}s, Allocated {allocated_memory:.2f} MB, Reserved {reserved_memory:.2f} MB")
